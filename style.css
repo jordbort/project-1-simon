@@ -1,10 +1,13 @@
 body {
-    background: url(./among-us-reactor.jpg);
+    /* background: url(./among-us-reactor.jpg); */
     background-repeat: no-repeat;
     background-position: top center;
     background-size: auto;
     font-family: Arial, Helvetica, sans-serif;
     display: flex;
+    /* justify-content: center; */
+    justify-content: center;
+    /* column-gap: 10px 10px; */
 }
 /* 
 Gray light hex code: #696969
@@ -22,5 +25,28 @@ Red right square hex code: #D12F00
 */
 
 .game-board {
-    
+    background-color: #111111;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    margin: auto;
+    width: 67%;
+    /* min-height: 400px; */
+}
+.left-panel {
+    background-color: #AAAAAA;
+    /* margin: auto; */
+    padding: 5%;
+    width: 30%;
+}
+.right-panel {
+    background-color: #BBBBBB;
+    /* margin: auto; */
+    padding: 5%;
+    width: 30%;
+}
+.left-lights {
+    background-color: #696969;
+}
+.right-lights {
+    background-color: #696969;
 }
