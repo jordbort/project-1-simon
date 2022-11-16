@@ -66,28 +66,28 @@ body {
 }
 
 /* ID styling */
-#left-light-1, #left-light-2, #left-light-3, #left-light-4, #left-light-5, #left-light-6, #left-light-7, #left-light-8, #left-light-9 {
+.left-light {
     background-color: #696969;
     border: solid #333333 3px;
     border-radius: 50%;
     width: 20px;
     height: 20px;
 }
-#right-light-1, #right-light-2, #right-light-3, #right-light-4, #right-light-5, #right-light-6, #right-light-7, #right-light-8, #right-light-9 {
+.right-light {
     background-color: #696969;
     border: solid #333333 3px;
     border-radius: 50%;
     width: 20px;
     height: 20px;
 }
-#left-box-1, #left-box-2, #left-box-3, #left-box-4, #left-box-5, #left-box-6, #left-box-7, #left-box-8, #left-box-9 {
+.left-box {
     background-color: #000000;
     border: none;
     border-radius: 0;
     width: 60px;
     height: 60px;
 }
-#right-box-1, #right-box-2, #right-box-3, #right-box-4, #right-box-5, #right-box-6, #right-box-7, #right-box-8, #right-box-9 {
+.right-box {
     border-style: outset;
     border-width: 8px;
     background-color: #B2B0B3;
