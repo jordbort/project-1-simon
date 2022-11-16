@@ -176,9 +176,6 @@ rightBox9.addEventListener("click", () => {
 // }
 listening = true
 newSequence()
-for(i=0;i<5;i++) {
-    console.log(`Round ${i+1}`)
-}
 const checkInput = () => {
     if(playerArr.length === sequence.length) {
         console.log(`Check! (Lengths are the same!)`)
@@ -189,13 +186,20 @@ const checkInput = () => {
     }
 }
 const compareArr = () => {
+    listening = false
     console.log(`Comparing:`)
-    console.log(`Sequence:`, sequence[0], sequence[1], sequence[2], sequence[3], sequence[4])
-    console.log(`User input:`, playerArr[0], playerArr[1], playerArr[2], playerArr[3], playerArr[4])
+    console.log(`Sequence:`, sequence)
+    console.log(`User input:`, playerArr)
     if(`${playerArr}` === `${sequence}`) {
         console.log(`Task Completed!`)
     }
     else {
         console.log(`Task Failed!`)
+    }
+}
+for(i=0;i<5;i++) {
+    console.log(`Round ${i+1}`)
+    for(j=0;j<i+1;j++) {
+        console.log(sequence[j])
     }
 }
