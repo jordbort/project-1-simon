@@ -35,7 +35,7 @@ body {
     width: 75%;
     height: 35vh;
 }
-.left-lights, .right-lights {
+.left-indicator, .right-indicator {
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-around;
@@ -125,7 +125,7 @@ body {
         width: 40%;
         height: 53vh;
     }
-    .left-lights, .right-lights {
+    .left-indicator, .right-indicator {
         width: 90%;
     }
     .left-grid {
