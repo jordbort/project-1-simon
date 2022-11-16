@@ -52,3 +52,150 @@ const rightBox6 = document.querySelector("#right-box-6")
 const rightBox7 = document.querySelector("#right-box-7")
 const rightBox8 = document.querySelector("#right-box-8")
 const rightBox9 = document.querySelector("#right-box-9")
+
+// const blink = (color, returnColor) => {
+// }
+// rightBox1.addEventListener("click", () => {
+//     console.log(`${rightBox1} was clicked!`)
+//     this.style.backgroundColor = `#327DBD`
+//     setTimeout(this.style.backgroundColor = `#B2B0B3`, 500)
+// })
+
+
+
+
+
+
+// class Button {
+//     constructor(originalColor = `#B2B0B3`) {
+//         this.originalColor = originalColor
+//     }
+//     blink(blinkColor) {
+//         this.style.backgroundColor = blinkColor
+//         setTimeout(this.style.backgroundColor = this.originalColor, 500)
+//     }
+// }
+
+// const rightBox1 = new Button
+// const rightBox2 = new Button
+// const rightBox3 = new Button
+// const rightBox4 = new Button
+// const rightBox5 = new Button
+// const rightBox6 = new Button
+// const rightBox7 = new Button
+// const rightBox8 = new Button
+// const rightBox9 = new Button
+
+
+let listening = false
+let sequence = []
+let playerArr = []
+const newSequence = () => {
+    sequence = []
+    for(i=0;i<5;i++) {
+        sequence.push(Math.ceil(Math.random() * 9))
+    }
+    console.log(sequence)
+}
+
+rightBox1.addEventListener("click", () => {
+    if(listening) {
+        playerArr.push(1)
+        console.log(playerArr)
+        checkInput()
+    }
+})
+rightBox2.addEventListener("click", () => {
+    if(listening) {
+        playerArr.push(2)
+        console.log(playerArr)
+        checkInput()
+    }
+})
+rightBox3.addEventListener("click", () => {
+    if(listening) {
+        playerArr.push(3)
+        console.log(playerArr)
+        checkInput()
+    }
+})
+rightBox4.addEventListener("click", () => {
+    if(listening) {
+        playerArr.push(4)
+        console.log(playerArr)
+        checkInput()
+    }
+})
+rightBox5.addEventListener("click", () => {
+    if(listening) {
+        playerArr.push(5)
+        console.log(playerArr)
+        checkInput()
+    }
+})
+rightBox6.addEventListener("click", () => {
+    if(listening) {
+        playerArr.push(6)
+        console.log(playerArr)
+        checkInput()
+    }
+})
+rightBox7.addEventListener("click", () => {
+    if(listening) {
+        playerArr.push(7)
+        console.log(playerArr)
+        checkInput()
+    }
+})
+rightBox8.addEventListener("click", () => {
+    if(listening) {
+        playerArr.push(8)
+        console.log(playerArr)
+        checkInput()
+    }
+})
+rightBox9.addEventListener("click", () => {
+    if(listening) {
+        playerArr.push(9)
+        console.log(playerArr)
+        checkInput()
+    }
+})
+
+// while(playerArr.length < 5) {
+//     listening = true
+//     setInterval( () => {
+//         console.log(`waiting...`)
+//     }, 1000)
+// }
+// if(playerArr === sequence) {
+//     console.log(`Task Completed!`)
+// }
+// else {
+//     console.log(`Task Failed!`)
+// }
+listening = true
+newSequence()
+for(i=0;i<5;i++) {
+    console.log(`Round ${i+1}`)
+}
+const checkInput = () => {
+    if(playerArr.length === sequence.length) {
+        console.log(`Check! (Lengths are the same!)`)
+        compareArr()
+    }
+    else {
+        console.log(`Check! (Lengths are NOT yet the same!)`)
+    }
+}
+const compareArr = () => {
+    console.log(`Comparing:`)
+    console.log(`Sequence:`, sequence[0], sequence[1], sequence[2], sequence[3], sequence[4])
+    console.log(`User input:`, playerArr[0], playerArr[1], playerArr[2], playerArr[3], playerArr[4])
+    if(`${playerArr}` === `${sequence}`) {
+        console.log(`Task Completed!`)
+    }
+    else {
+        console.log(`Task Failed!`)
+    }
+}
