@@ -1,5 +1,18 @@
 console.log(`JavaScript loaded`)
 
+// Gray light hex code: #696969
+// Green light hex code: #00C000
+// Red light hex code: #C02C00
+
+// Gray panel hex code: #AAAAAA
+
+// Blue left square hex code: #44A8FF
+
+// Dark gray right square hex code: #626162
+// Light gray right square hex code: #D1D0D1
+// Blue right square hex code: #327DBD
+// Red right square hex code: #D12F00
+
 const gameBoard = document.querySelector(".game-board")
 const leftPanel = document.querySelector(".left-panel")
 const rightPanel = document.querySelector(".right-panel")
