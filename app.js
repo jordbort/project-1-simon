@@ -23,11 +23,28 @@ const rightGrid = document.querySelector(".right-grid")
 //     listening = false
 //     rightBoxes.
 // }
-let sequence = 1
+let roundNumber = 5
+// let roundIterator = 1
+let theAnswer = [1, 2, 3, 4, 5]
 let listening = true
 let selection;
+let playerArr = []
 function check() {
-    console.log(`time to check ${selection}`)
+    console.log(`time to check your answer! ${theAnswer} vs ${playerArr}`)
+    if(`${playerArr}` === `${theAnswer}`) {
+        console.log(`Task Completed!`)
+    }
+    else {
+        console.log(`Task Failed!`)
+    }
+}
+
+function buildAnswer() {
+    console.log(`Answer:`, theAnswer)
+    console.log(`playerArr:`, playerArr)
+    if(playerArr.length === roundNumber) {
+        check()
+    }
 }
 
 const leftLights = leftIndicator.querySelectorAll(`div`)
@@ -41,20 +58,21 @@ console.log(rightBoxes)
 rightBoxes.forEach(button => {
     button.addEventListener(`click`, function() {
         selection = Number(button.id[10])
-        console.log(selection)
+        console.log(`You pressed`, selection)
         if(listening) {
-            if(selection === sequence) {
+            if(selection === theAnswer) { // this will need to change before colors make sense
                 // correctBlink()
                 this.style.backgroundColor = `#327DBD`
                 setTimeout(() => this.style.backgroundColor = `#B2B0B3`, 100)
             }
-            else {
+            else { // this will need to change before colors make sense
                 // wrongClick()
                 this.style.backgroundColor = `#D12F00`
                 setTimeout(() => this.style.backgroundColor = `#B2B0B3`, 100)
             }
+            playerArr.push(selection)
+            buildAnswer()
         }
-        check()
     })
 })
 // const blink = (color, returnColor) => {
@@ -66,14 +84,14 @@ rightBoxes.forEach(button => {
 //     setTimeout(() => this.style.backgroundColor = `#B2B0B3`, 500)
 // })
 
-// let sequence = []
+// let theAnswer = []
 // let playerArr = []
-// const newSequence = () => {
-//     sequence = []
+// const newAnswer = () => {
+//     theAnswer = []
 //     for(i=0;i<5;i++) {
-//         sequence.push(Math.ceil(Math.random() * 9))
+//         theAnswer.push(Math.ceil(Math.random() * 9))
 //     }
-//     console.log(sequence)
+//     console.log(theAnswer)
 // }
 
 // rightBox1.addEventListener("click", () => {
@@ -146,16 +164,16 @@ rightBoxes.forEach(button => {
 //         console.log(`waiting...`)
 //     }, 1000)
 // }
-// if(playerArr === sequence) {
+// if(playerArr === theAnswer) {
 //     console.log(`Task Completed!`)
 // }
 // else {
 //     console.log(`Task Failed!`)
 // }
 // listening = true
-// newSequence()
+// newAnswer()
 // const checkInput = () => {
-//     if(playerArr.length === sequence.length) {
+//     if(playerArr.length === theAnswer.length) {
 //         console.log(`Check! (Lengths are the same!)`)
 //         compareArr()
 //     }
@@ -166,9 +184,9 @@ rightBoxes.forEach(button => {
 // const compareArr = () => {
 //     listening = false
 //     console.log(`Comparing:`)
-//     console.log(`Sequence:`, sequence)
+//     console.log(`Answer:`, theAnswer)
 //     console.log(`User input:`, playerArr)
-//     if(`${playerArr}` === `${sequence}`) {
+//     if(`${playerArr}` === `${theAnswer}`) {
 //         console.log(`Task Completed!`)
 //     }
 //     else {
@@ -178,6 +196,6 @@ rightBoxes.forEach(button => {
 // for(i=0;i<5;i++) {
 //     console.log(`Round ${i+1}`)
 //     for(j=0;j<i+1;j++) {
-//         console.log(sequence[j])
+//         console.log(theAnswer[j])
 //     }
 // }
