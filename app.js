@@ -18,6 +18,17 @@ const leftIndicator = document.querySelector(".left-indicator")
 const rightIndicator = document.querySelector(".right-indicator")
 const leftGrid = document.querySelector(".left-grid")
 const rightGrid = document.querySelector(".right-grid")
+// #626162
+// const disableButtons = () => {
+//     listening = false
+//     rightBoxes.
+// }
+let sequence = 1
+let listening = true
+let selection;
+function check() {
+    console.log(`time to check ${selection}`)
+}
 
 const leftLights = leftIndicator.querySelectorAll(`div`)
 console.log(leftLights)
@@ -29,12 +40,23 @@ const rightBoxes = rightGrid.querySelectorAll(`div`)
 console.log(rightBoxes)
 rightBoxes.forEach(button => {
     button.addEventListener(`click`, function() {
-        console.log(`click!`)
-        this.style.backgroundColor = `#327DBD`
-        setTimeout(() => this.style.backgroundColor = `#B2B0B3`, 100)
+        selection = Number(button.id[10])
+        console.log(selection)
+        if(listening) {
+            if(selection === sequence) {
+                // correctBlink()
+                this.style.backgroundColor = `#327DBD`
+                setTimeout(() => this.style.backgroundColor = `#B2B0B3`, 100)
+            }
+            else {
+                // wrongClick()
+                this.style.backgroundColor = `#D12F00`
+                setTimeout(() => this.style.backgroundColor = `#B2B0B3`, 100)
+            }
+        }
+        check()
     })
 })
-
 // const blink = (color, returnColor) => {
 // }
 // rightBox1.addEventListener("click", function() {
@@ -44,7 +66,6 @@ rightBoxes.forEach(button => {
 //     setTimeout(() => this.style.backgroundColor = `#B2B0B3`, 500)
 // })
 
-// let listening = false
 // let sequence = []
 // let playerArr = []
 // const newSequence = () => {
