@@ -47,7 +47,7 @@ const disableButtons = () => {
 
 // function wrongAnswer() {}
 function win() {
-    console.log(`Task Completed!`)
+    console.log(`Task Completed! GAME OVER`)
     disableButtons()
 }
 
@@ -85,7 +85,7 @@ function computerTurn() {
         sequence.push(theAnswer[i])
         console.log(`*** Building round sequence: ${sequence.length} / ${roundNumber}`)
     }
-    console.log(`Round sequence is: ${sequence}`)
+    console.log(`It's your turn! Round sequence is: ${sequence}`)
 }
 
 rightBoxes.forEach(button => {
