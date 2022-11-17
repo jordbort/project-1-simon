@@ -24,28 +24,8 @@ const leftBoxes = leftGrid.querySelectorAll(`div`)
 const rightLights = rightIndicator.querySelectorAll(`div`)
 const rightBoxes = rightGrid.querySelectorAll(`div`)
 
-rightBoxes.forEach(button => {
-    button.addEventListener(`click`, function() {
-        selection = Number(button.id[10])
-        console.log(`*** You pressed`, selection)
-        if(listening) {
-            if(selection === theAnswer) { // this will need to change before colors make sense
-                // correctBlink()
-                this.style.backgroundColor = `#327DBD`
-                setTimeout(() => this.style.backgroundColor = `#B2B0B3`, 100)
-            }
-            else { // this will need to change before colors make sense
-                // wrongClick()
-                this.style.backgroundColor = `#D12F00`
-                setTimeout(() => this.style.backgroundColor = `#B2B0B3`, 100)
-            }
-            playerArr.push(selection)
-            buildAnswer()
-        }
-    })
-})
-
-let roundNumber = 5 // this will become iterator or get deleted
+let roundNumber = 1
+// let roundIterator = 0
 let theAnswer = []
 let playerArr = []
 let listening = true
@@ -56,47 +36,88 @@ const newAnswer = () => {
     for(i=0;i<5;i++) {
         theAnswer.push(Math.ceil(Math.random() * 9))
     }
-    console.log(theAnswer)
+    console.log(`The answer is: ${theAnswer}`)
 }
 
 // #626162
 const disableButtons = () => {
     listening = false
+    console.log(`*** Buttons disabled`)
 }
 
 // function wrongAnswer() {}
-
-function check() {
-    console.log(`*** Checking answer! ${theAnswer} vs. ${playerArr}`)
-    if(`${playerArr}` === `${theAnswer}`) {
-        console.log(`Task Completed! RIGHT ANSWER`)
-    }
-    else {
-        console.log(`Task Failed! WRONG ANSWER`)
-    }
+function win() {
+    console.log(`Task Completed!`)
     disableButtons()
-    console.log(`*** No longer building answer ***`)
 }
 
-function buildAnswer() {
-    console.log(`*** Player array vs. Round: ${playerArr.length} / ${roundNumber}`)
-    console.log(`Answer:`, theAnswer)
-    console.log(`playerArr:`, playerArr)
+function checkSequence() {
+    console.log(`*** Round ${roundNumber} complete!`)
+    roundNumber++
+    if(roundNumber > 5) {
+        win()
+    }
+    else {
+        computerTurn()
+    }
+}
+
+function submitAnswer() {
+    console.log(`Array length vs. Round number: ${playerArr.length} / ${roundNumber}`)
     if(playerArr.length === roundNumber) {
-        check()
+        // roundIterator = 0
+        checkSequence()
     }
 }
 
 function reset() {
+    console.log(`*** GAME RESET`)
     newAnswer()
-    playerArr = []
-    roundNumber = 0
+    roundNumber = 1
+    computerTurn()
 }
 
-// reset()
-// for(i=0;i<5;i++) {
-//     roundNumber += i
-// }
+function computerTurn() {
+    console.log(`Round ${roundNumber}: It's the computer's turn!`)
+    playerArr = []
+    sequence = []
+    for(i=0;i<roundNumber;i++) {
+        sequence.push(theAnswer[i])
+        console.log(`*** Building round sequence: ${sequence.length} / ${roundNumber}`)
+    }
+    console.log(`Round sequence is: ${sequence}`)
+}
+
+rightBoxes.forEach(button => {
+    button.addEventListener(`click`, function() {
+        selection = Number(button.id[10])
+        console.log(`*** You pressed`, selection)
+        if(listening) {
+            if(selection === theAnswer[playerArr.length]) { // this will need to change before colors make sense
+                playerArr.push(selection)
+                console.log(`***`, selection, `was correct! Your array: ${playerArr}`)
+                // console.log(`Answer:`, theAnswer)
+                // console.log(`playerArr:`, playerArr)
+                // correctBlink()
+                this.style.backgroundColor = `#327DBD`
+                setTimeout(() => this.style.backgroundColor = `#B2B0B3`, 100)
+                submitAnswer()
+            }
+            else { // this will need to change before colors make sense
+                console.log(`***`, selection, `was NOT correct!`)
+                // wrongClick() will replace the color changes below
+                this.style.backgroundColor = `#D12F00`
+                setTimeout(() => this.style.backgroundColor = `#B2B0B3`, 100)
+                reset()
+                // return
+            }
+        }
+    })
+})
+
+reset()
+
+// console.log(`*** Outside of for loop. Round: ${roundNumber} ***`)
 
 // const blink = (color, returnColor) => {
 // }
