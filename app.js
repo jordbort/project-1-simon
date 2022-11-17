@@ -25,11 +25,11 @@ const rightLights = rightIndicator.querySelectorAll(`div`)
 const rightBoxes = rightGrid.querySelectorAll(`div`)
 
 let roundNumber = 1
-// let roundIterator = 0
 let theAnswer = []
 let playerArr = []
-let listening = true
-let selection;
+let listening = false
+let selection
+let sequence = []
 
 const newAnswer = () => {
     theAnswer = []
@@ -37,44 +37,6 @@ const newAnswer = () => {
         theAnswer.push(Math.ceil(Math.random() * 9))
     }
     console.log(`The answer is: ${theAnswer}`)
-}
-
-// #626162
-const disableButtons = () => {
-    listening = false
-    console.log(`*** Buttons disabled`)
-}
-
-// function wrongAnswer() {}
-function win() {
-    console.log(`Task Completed! GAME OVER`)
-    disableButtons()
-}
-
-function checkSequence() {
-    console.log(`*** Round ${roundNumber} complete!`)
-    roundNumber++
-    if(roundNumber > 5) {
-        win()
-    }
-    else {
-        computerTurn()
-    }
-}
-
-function submitAnswer() {
-    console.log(`Array length vs. Round number: ${playerArr.length} / ${roundNumber}`)
-    if(playerArr.length === roundNumber) {
-        // roundIterator = 0
-        checkSequence()
-    }
-}
-
-function reset() {
-    console.log(`*** GAME RESET`)
-    newAnswer()
-    roundNumber = 1
-    computerTurn()
 }
 
 function computerTurn() {
@@ -85,45 +47,74 @@ function computerTurn() {
         sequence.push(theAnswer[i])
         console.log(`*** Building round sequence: ${sequence.length} / ${roundNumber}`)
     }
+    enableButtons()
     console.log(`It's your turn! Round sequence is: ${sequence}`)
+}
+
+function reset() {
+    console.log(`*** GAME RESET`)
+    newAnswer()
+    roundNumber = 1
+    computerTurn()
+}
+
+// #626162
+const disableButtons = () => {
+    listening = false
+    console.log(`*** Buttons disabled`)
+}
+const enableButtons = () => {
+    listening = true
+    console.log(`*** Buttons enabled`)
+}
+
+// function wrongAnswer() {}
+
+function win() {
+    console.log(`Task Completed! GAME OVER`)
+    theAnswer = []
+}
+
+function checkSequence() {
+    console.log(`*** Round ${roundNumber} complete!`)
+    roundNumber++
+    disableButtons()
+    if(roundNumber > 5) {
+        win()
+    }
+    else {
+        computerTurn()
+    }
+}
+
+function submitAnswer() {
+    console.log(`Round progress: ${playerArr.length} / ${roundNumber}. Sequence: ${sequence}`)
+    if(playerArr.length === roundNumber) {
+        checkSequence()
+    }
 }
 
 rightBoxes.forEach(button => {
     button.addEventListener(`click`, function() {
         selection = Number(button.id[10])
-        console.log(`*** You pressed`, selection)
         if(listening) {
-            if(selection === theAnswer[playerArr.length]) { // this will need to change before colors make sense
+            console.log(`*** You pressed`, selection, `Expecting:`, theAnswer[playerArr.length])
+            if(selection === theAnswer[playerArr.length]) {
                 playerArr.push(selection)
                 console.log(`***`, selection, `was correct! Your array: ${playerArr}`)
-                // console.log(`Answer:`, theAnswer)
-                // console.log(`playerArr:`, playerArr)
-                // correctBlink()
                 this.style.backgroundColor = `#327DBD`
                 setTimeout(() => this.style.backgroundColor = `#B2B0B3`, 100)
                 submitAnswer()
             }
-            else { // this will need to change before colors make sense
+            else {
                 console.log(`***`, selection, `was NOT correct!`)
                 // wrongClick() will replace the color changes below
                 this.style.backgroundColor = `#D12F00`
                 setTimeout(() => this.style.backgroundColor = `#B2B0B3`, 100)
                 reset()
-                // return
             }
         }
     })
 })
 
 reset()
-
-// console.log(`*** Outside of for loop. Round: ${roundNumber} ***`)
-
-// const blink = (color, returnColor) => {
-// }
-// rightBox1.addEventListener("click", function() {
-//     console.log(`${rightBox1} was clicked!`)
-//     console.log(this)
-//     this.style.backgroundColor = `#327DBD`
-//     setTimeout(() => this.style.backgroundColor = `#B2B0B3`, 500)
-// })
