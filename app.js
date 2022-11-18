@@ -44,19 +44,25 @@ const reset = () => {
 // Main functions
 const computerTurn = () => {
     console.log(`Round ${roundNumber}: It's the computer's turn!`)
+    // Turn right lights dark gray
+    rightLights.forEach(function(light) {
+        light.style.backgroundColor = `#696969`
+    })
     // Turn right squares dark gray
     rightBoxes.forEach(function(square) {
         square.style.backgroundColor = `#626162`
     })
     sequence = []
+    // Compile lights and sequence
     for(i=0;i<roundNumber;i++) {
-        // Left side lights - one for each round
         sequence.push(theAnswer[i])
         leftLights[i].style.backgroundColor = `#00C000`
-        setTimeout( () => console.log(`> Building round sequence: ${sequence.length} / ${roundNumber}`), 1000)
     }
     
-    // this is where the computer should blink the sequence at the player
+    // this is where the computer should somehow blink the sequence at the player 
+    for(i=0;i<roundNumber;i++) {
+        console.log(`> Flashing light ${i+1}: ***`, sequence[i], `***`)
+    }
     
     playerArr = []
     enableButtons()
@@ -79,16 +85,16 @@ function wrongClick() {
 }
 
 const win = () => {
-    listening = false
-    //Turn right squares dark dray
-    setTimeout( () => rightBoxes.forEach(function(square) {
-        square.style.backgroundColor = `#696969`, 500
-    }), 500)
-    // setTimeout( make right boxes dark gray, 500)
     console.log(`You won! Buttons disabled: GAME OVER`)
+    listening = false
+    //Turn on timer to make right squares "dark gray"
+    setTimeout( () => rightBoxes.forEach(function(square) {
+        square.style.backgroundColor = `#696969`
+    }), 300)
+    // Make all boxes blink "blue"
     rightBoxes.forEach(function(square) {
         square.classList.add(`blue`)
-        setTimeout( () => square.classList.remove(`blue`), 500)
+        setTimeout( () => square.classList.remove(`blue`), 300)
     })
     theAnswer = []
 }
