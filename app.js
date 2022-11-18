@@ -1,4 +1,4 @@
-console.log(`JavaScript loaded`)
+console.log(`*** Buttons aren't listening yet`)
 // Left & right lights and boxes - containers
 const leftIndicator = document.querySelector(".left-indicator")
 const rightIndicator = document.querySelector(".right-indicator")
@@ -21,9 +21,9 @@ let sequence = []
 
 // Callback(?) functions
 const enableButtons = () => {
-    console.log(`*** Buttons enabled`)
-    // Right boxes turn light "gray" when listening
+    console.log(`*** Buttons: "light gray" and enabled`)
     listening = true
+    // Right boxes turn "light gray" when listening
     rightBoxes.forEach(function(square) {
         square.style.backgroundColor = `#B2B0B3`
     })
@@ -45,19 +45,23 @@ const reset = () => {
 const computerTurn = () => {
     console.log(`Round ${roundNumber}: It's the computer's turn!`)
     // Reset left lights to "gray"
+    console.log(`*** Left lights reset to "gray"`)
     leftLights.forEach(function(light) {
         light.style.backgroundColor = `#696969`
     })
     sequence = []
     // Compile left lights and round sequence
     for(i=0;i<roundNumber;i++) {
+        console.log(`> Building left green lights:`, i+1)
         sequence.push(theAnswer[i])
         leftLights[i].style.backgroundColor = `#00C000`
     }
+    console.log(`> All left green lights are lit!`)
     // Turn right lights "gray"
     rightLights.forEach(function(light) {
         light.style.backgroundColor = `#696969`
     })
+    console.log(`*** Boxes: "dark gray"`)
     // Turn right squares "dark gray"
     rightBoxes.forEach(function(square) {
         square.style.backgroundColor = `#626162`
@@ -65,7 +69,7 @@ const computerTurn = () => {
     
     // this is where the computer should somehow blink the sequence at the player 
     for(i=0;i<roundNumber;i++) {
-        console.log(`> Flashing light ${i+1}: ***`, sequence[i], `***`)
+        console.log(`>>> Blinking left box, ${i+1}: ***`, sequence[i], `***`)
     }
     
     playerArr = []
@@ -74,7 +78,9 @@ const computerTurn = () => {
 }
 
 function wrongClick() {
+    console.log(`*** Buttons no longer listening`)
     listening = false
+    console.log(`*** ALL boxes: "red"`)
     // Flash all right side red three times
     rightLights.forEach(function(light) {
         light.classList.add(`red`)
@@ -95,6 +101,7 @@ const win = () => {
     setTimeout( () => rightBoxes.forEach(function(square) {
         square.style.backgroundColor = `#696969`
     }), 300)
+    console.log(`*** ALL boxes: "blue"`)
     // Make all boxes blink "blue"
     rightBoxes.forEach(function(square) {
         square.classList.add(`blue`)
@@ -119,22 +126,24 @@ rightBoxes.forEach(button => {
                     console.log(`*** Round ${roundNumber} complete!`)
                     // Stop accepting input, increment round number
                     listening = false
+                    console.log(`*** Buttons no longer listening`)
                     roundNumber++
                     if(roundNumber > 5) {
                         // We're past round 5, we won the game!
                         return win()
                     }
                     else {
-                        // Clicked box blinks "cyan"
-                        this.classList.add(`cyan`)
-                        setTimeout( () => this.classList.remove(`cyan`), 300)
                         // Start computer turn, on a delay
                         setTimeout( () => computerTurn(), 500)
                     }
                 }
+                // Clicked box blinks "cyan"
+                console.log(`*** Button: "cyan"`)
+                this.classList.add(`cyan`)
+                setTimeout( () => this.classList.remove(`cyan`), 300)
             }
             else {
-                console.log(`*** Buttons disabled,`, selection, `was NOT correct!`)
+                console.log(`***`, selection, `was NOT correct!`)
                 wrongClick()
             }
         }

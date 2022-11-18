@@ -80,7 +80,7 @@ body {
 .right-box {
     border-style: outset;
     border-width: 8px;
-    background-color: #626162;
+    background-color: #696969;
     width: 42px;
     height: 42px;
 }
@@ -111,7 +111,7 @@ Left/right lights - "Green" hex code: #00C000
 Left/right lights - "Red" hex code: #C02C00
 Left/right panel - "Gray" hex code: #AAAAAA
 Left squares - "Blue" hex code: #44A8FF
-Right squares - "Dark gray" hex code: #626162
+Right squares - "Dark gray" hex code changed to #696969, original: #626162
 Right squares - "Light gray" hex code: #D1D0D1
 Right squares - "Blue" hex code: #327DBD
 Right squares - "Red" hex code: #D12F00
