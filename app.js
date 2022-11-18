@@ -1,19 +1,5 @@
 console.log(`JavaScript loaded`)
 
-// Gray light hex code: #696969
-// Green light hex code: #00C000
-// Red light hex code: #C02C00
-
-// Gray panel hex code: #AAAAAA
-
-// Blue left square hex code: #44A8FF
-
-// Dark gray right square hex code: #626162
-// Light gray right square hex code: #D1D0D1
-// Blue right square hex code: #327DBD
-// Red right square hex code: #D12F00
-
-// const gameBoard = document.querySelector(".game-board")
 const leftIndicator = document.querySelector(".left-indicator")
 const rightIndicator = document.querySelector(".right-indicator")
 const leftGrid = document.querySelector(".left-grid")
@@ -67,18 +53,20 @@ const reset = () => {
     console.log(`*** GAME RESET`)
     newAnswer()
     roundNumber = 1
-    computerTurn()
 }
 
 function wrongClick() {
     disableButtons()
+    setTimeout(() => enableButtons(), 1500)
     rightLights.forEach(function(light) {
-        light.style.backgroundColor = `#D12F00`
+        light.classList.add(`red`)
+        setTimeout(() => light.classList.remove(`red`), 1500)
     })
-    rightBoxes.forEach(function(light) {
-        light.style.backgroundColor = `#D12F00`
+    rightBoxes.forEach(function(box) {
+        box.classList.add(`red`)
+        setTimeout(() => box.classList.remove(`red`), 1500)
     })
-    reset()
+    // reset()
 }
 
 const win = () => {
@@ -88,15 +76,15 @@ const win = () => {
     theAnswer = []
 }
 
-// const checkSequence = () => {
-//     if(roundNumber > 5) {
-//         win()
-//     }
-//     else {
-//         computerTurn()
-//     }
-// }
-
+const checkSequence = () => {
+    if(roundNumber > 5) {
+        win()
+    }
+    else {
+        computerTurn()
+    }
+}
+            
 const buildPlayerArr = () => {
     console.log(`Round progress: ${playerArr.length} / ${roundNumber}. Sequence: ${sequence}`)
     if(playerArr.length === roundNumber) {
@@ -111,7 +99,7 @@ const buildPlayerArr = () => {
         }
     }
 }
-
+    
 rightBoxes.forEach(button => {
     button.addEventListener(`click`, function() {
         selection = Number(button.id[10])
@@ -122,18 +110,15 @@ rightBoxes.forEach(button => {
                 console.log(`***`, selection, `was correct! Your array: ${playerArr}`)
                 // buildPlayerArr()
                 this.classList.add(`cyan`)
-                setTimeout(() => this.classList.remove(`cyan`), 250)
+                setTimeout(() => this.classList.remove(`cyan`), 300)
             }
             else {
                 console.log(`***`, selection, `was NOT correct!`)
-                // disableButtons()
-                // wrongClick()
-                this.classList.add(`red`)
-                setTimeout(() => this.classList.remove(`red`), 250)
-                // reset()
+                wrongClick()
             }
         }
     })
 })
-
+    
 reset()
+computerTurn()

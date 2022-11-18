@@ -118,17 +118,18 @@ Red right square hex code: #D12F00
 /* Animation blink classes */
 .blue {
     animation: blink-blue;
-    animation-duration: .1s;
+    animation-duration: .15s;
     animation-timing-function: step-end;
 }
 .red {
     animation: blink-red;
-    animation-duration: .1s;
+    animation-duration: .5s;
+    animation-iteration-count: 3;
     animation-timing-function: step-end;
 }
 .cyan {
     animation: blink-cyan;
-    animation-duration: .1s;
+    animation-duration: .15s;
     animation-timing-function: step-end;
 }
 @keyframes blink-blue {
@@ -136,6 +137,7 @@ Red right square hex code: #D12F00
 }
 @keyframes blink-red {
     0% { background-color: #D12F00; }
+    50% { background-color: #C0C0C0; }
 }
 @keyframes blink-cyan {
     0% { background-color: #327DBD; }
