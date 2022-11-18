@@ -70,9 +70,14 @@ const reset = () => {
     computerTurn()
 }
 
-const wrongClick = () => {
-    // instead of disableButtons() there will be an "all boxes red" function
+function wrongClick() {
     disableButtons()
+    rightLights.forEach(function(light) {
+        light.style.backgroundColor = `#D12F00`
+    })
+    rightBoxes.forEach(function(light) {
+        light.style.backgroundColor = `#D12F00`
+    })
     reset()
 }
 
@@ -115,15 +120,17 @@ rightBoxes.forEach(button => {
             if(selection === theAnswer[playerArr.length]) {
                 playerArr.push(selection)
                 console.log(`***`, selection, `was correct! Your array: ${playerArr}`)
-                buildPlayerArr()
-                this.style.backgroundColor = `#327DBD`
-                setTimeout(() => this.style.backgroundColor = `#B2B0B3`, 100)
+                // buildPlayerArr()
+                this.classList.add(`cyan`)
+                setTimeout(() => this.classList.remove(`cyan`), 250)
             }
             else {
                 console.log(`***`, selection, `was NOT correct!`)
-                wrongClick()
-                this.style.backgroundColor = `#D12F00`
-                setTimeout(() => this.style.backgroundColor = `#B2B0B3`, 100)
+                // disableButtons()
+                // wrongClick()
+                this.classList.add(`red`)
+                setTimeout(() => this.classList.remove(`red`), 250)
+                // reset()
             }
         }
     })
