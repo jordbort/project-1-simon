@@ -48,13 +48,13 @@ const reset = () => {
 // Computer's turn: the right panel resets, the left panel's lights increment, and the round sequence is shown
 const computerTurn = () => {
     console.log(`Round ${roundNumber}: It's the computer's turn!`)
-
-    // Reset left lights to "gray"
-    console.log(`*** Left lights grayed out`)
-    leftLights.forEach(function(light) {
-        light.style.backgroundColor = `#696969`
-    })
-
+    
+        // Reset left lights to "gray"
+        console.log(`*** Left lights grayed out`)
+        leftLights.forEach(function(light) {
+            light.style.backgroundColor = `#696969`
+        })
+    
     // Compile left lights and round sequence
     sequence = []
     for(i=0;i<roundNumber;i++) {
@@ -68,12 +68,6 @@ const computerTurn = () => {
     console.log(`*** Right lights grayed out`)
     rightLights.forEach(function(light) {
         light.style.backgroundColor = `#696969`
-    })
-
-    // Turn right squares "dark gray"
-    console.log(`*** Boxes: "dark gray"`)
-    rightBoxes.forEach(function(square) {
-        square.style.backgroundColor = `#696969`
     })
     
     // Computer blinks the sequence at the player 
@@ -179,7 +173,12 @@ rightBoxes.forEach(button => {
 
                     // If not, start the computer's turn, on a delay
                     else {
-                        setTimeout( () => computerTurn(), 300)
+                        // Turn right squares "dark gray"
+                        setTimeout( () => console.log(`*** Boxes: "dark gray"`), 300)
+                        setTimeout( () => rightBoxes.forEach(function(square) {
+                            square.style.backgroundColor = `#696969`
+                        }), 300)
+                        setTimeout( () => computerTurn(), 600)
                     }
                 }
 
