@@ -42,7 +42,7 @@ const newAnswer = () => {
 const reset = () => {
     console.log(`---------- * GAME RESET * ----------`)
     newAnswer()
-    roundNumber = 1 // Set to 5 while testing last round
+    roundNumber = 5 // Set to 5 while testing last round
 }
 
 // Computer's turn: the right panel resets, the left panel's lights increment, and the round sequence is shown
@@ -58,7 +58,7 @@ const computerTurn = () => {
     // Compile left lights and round sequence
     sequence = []
     for(i=0;i<roundNumber;i++) {
-        console.log(`> Building left green lights:`, i+1)
+        // console.log(`> Building left green lights:`, i+1)
         sequence.push(theAnswer[i])
         leftLights[i].style.backgroundColor = `#00C000`
     }
@@ -80,6 +80,7 @@ const computerTurn = () => {
     for(i=0;i<roundNumber;i++) {
         console.log(`>>> Blinking left box, ${i+1}: ***`, sequence[i], `***`)
     }
+    // leftBoxes.forEach()
 
     // Empty our player array in preparation for their turn, and enable buttons
     console.log(`It's your turn! Round sequence is: ${sequence}`)
@@ -130,7 +131,8 @@ const win = () => {
 rightBoxes.forEach(button => {
     button.addEventListener(`click`, function() {
 
-        selection = Number(button.id[10])   // change this to the new "data" thing you learned
+        // "selection" variable takes the respective data (a string) from the HTML, and converts it to a number
+        selection = Number(button.dataset.num)
         // Only if buttons are listening:
         if(listening) {
 
