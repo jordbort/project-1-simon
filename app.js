@@ -19,12 +19,18 @@ let sequence = []
 
 // #626162
 const disableButtons = () => {
-    listening = false
     console.log(`*** Buttons disabled`)
+    listening = false
+    rightBoxes.forEach(function(box) {
+        box.style.backgroundColor = `#626162`
+    })
 }
 const enableButtons = () => {
-    listening = true
     console.log(`*** Buttons enabled`)
+    listening = true
+    rightBoxes.forEach(function(box) {
+        box.style.backgroundColor = `#B2B0B3`
+    })
 }
 
 const newAnswer = () => {
@@ -32,16 +38,16 @@ const newAnswer = () => {
     for(i=0;i<5;i++) {
         theAnswer.push(Math.ceil(Math.random() * 9))
     }
-    console.log(`The answer is: ${theAnswer}`)
+    console.log(`*** The answer is: ${theAnswer}`)
 }
 
 const computerTurn = () => {
+    disableButtons()
     console.log(`Round ${roundNumber}: It's the computer's turn!`)
-    // disableButtons()
     sequence = []
     for(i=0;i<roundNumber;i++) {
         sequence.push(theAnswer[i])
-        console.log(`*** Building round sequence: ${sequence.length} / ${roundNumber}`)
+        console.log(`> Building round sequence: ${sequence.length} / ${roundNumber}`)
     }
     // this is where the computer should blink the sequence at the player
     playerArr = []
@@ -50,70 +56,88 @@ const computerTurn = () => {
 }
 
 const reset = () => {
-    console.log(`*** GAME RESET`)
+    console.log(`---------- * GAME RESET * ----------`)
     newAnswer()
     roundNumber = 1
 }
 
 function wrongClick() {
-    disableButtons()
-    setTimeout(() => enableButtons(), 1500)
+    listening = false
     rightLights.forEach(function(light) {
         light.classList.add(`red`)
-        setTimeout(() => light.classList.remove(`red`), 1500)
+        setTimeout( () => light.classList.remove(`red`), 1800)
     })
     rightBoxes.forEach(function(box) {
         box.classList.add(`red`)
-        setTimeout(() => box.classList.remove(`red`), 1500)
+        setTimeout( () => box.classList.remove(`red`), 1800)
     })
-    // reset()
+    reset()
+    setTimeout( () => computerTurn(), 1800)
 }
 
 const win = () => {
-    console.log(`Task Completed! GAME OVER`)
-    // instead of disableButtons() there will be an "all boxes blue" function
-    disableButtons()
+    listening = false
+    setTimeout( () => disableButtons(), 500)
+    console.log(`You won! Buttons disabled: GAME OVER`)
+    rightBoxes.forEach(function(box) {
+        box.classList.add(`blue`)
+        setTimeout( () => box.classList.remove(`blue`), 500)
+    })
     theAnswer = []
 }
 
-const checkSequence = () => {
-    if(roundNumber > 5) {
-        win()
-    }
-    else {
-        computerTurn()
-    }
-}
+// const checkSequence = () => {
+//     if(roundNumber > 5) {
+//         win()
+//     }
+//     else {
+//         computerTurn()
+//     }
+// }
             
-const buildPlayerArr = () => {
-    console.log(`Round progress: ${playerArr.length} / ${roundNumber}. Sequence: ${sequence}`)
-    if(playerArr.length === roundNumber) {
-        console.log(`*** Round ${roundNumber} complete!`)
-        roundNumber++
-        // checkSequence()
-        if(roundNumber > 5) {
-            win()
-        }
-        else {
-            computerTurn()
-        }
-    }
-}
-    
+// const buildPlayerArr = () => {
+//     console.log(`Round progress: ${playerArr.length} / ${roundNumber}. Sequence: ${sequence}`)
+//     if(playerArr.length === roundNumber) {
+//         console.log(`*** Round ${roundNumber} complete!`)
+//         roundNumber++
+//         // checkSequence()
+//         if(roundNumber > 5) {
+//             win()
+//         }
+//         else {
+//             computerTurn()
+//         }
+//     }
+// }
+
 rightBoxes.forEach(button => {
     button.addEventListener(`click`, function() {
         selection = Number(button.id[10])
         if(listening) {
-            console.log(`*** You pressed`, selection, `Expecting:`, theAnswer[playerArr.length])
+            console.log(`*** You pressed`, selection, `, Expecting`, theAnswer[playerArr.length])
             if(selection === theAnswer[playerArr.length]) {
                 playerArr.push(selection)
                 console.log(`***`, selection, `was correct! Your array: ${playerArr}`)
+                
                 // buildPlayerArr()
+                console.log(`Round progress: ${playerArr.length} / ${roundNumber}. Sequence: ${sequence}`)
+                if(playerArr.length === roundNumber) {
+                    console.log(`*** Round ${roundNumber} complete!`)
+                    roundNumber++
+                    // checkSequence()
+                    if(roundNumber > 5) {
+                        return win()
+                    }
+                    else {
+                        computerTurn()
+                    }
+                }
+                                
                 this.classList.add(`cyan`)
-                setTimeout(() => this.classList.remove(`cyan`), 300)
+                setTimeout( () => this.classList.remove(`cyan`), 300)
             }
             else {
-                console.log(`***`, selection, `was NOT correct!`)
+                console.log(`*** Buttons disabled,`, selection, `was NOT correct!`)
                 wrongClick()
             }
         }
@@ -122,3 +146,4 @@ rightBoxes.forEach(button => {
     
 reset()
 computerTurn()
+// win()

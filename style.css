@@ -101,6 +101,7 @@ body {
 #right-box-7 { grid-area: 3 / 1 / 4 / 2; }
 #right-box-8 { grid-area: 3 / 2 / 4 / 3; }
 #right-box-9 { grid-area: 3 / 3 / 4 / 4; }
+
 /* 
 Gray light hex code: #696969
 Green light hex code: #00C000
@@ -115,15 +116,16 @@ Light gray right square hex code: #D1D0D1
 Blue right square hex code: #327DBD
 Red right square hex code: #D12F00
 */
+
 /* Animation blink classes */
 .blue {
     animation: blink-blue;
-    animation-duration: .15s;
+    animation-duration: .6s;
     animation-timing-function: step-end;
 }
 .red {
     animation: blink-red;
-    animation-duration: .5s;
+    animation-duration: .6s;
     animation-iteration-count: 3;
     animation-timing-function: step-end;
 }
