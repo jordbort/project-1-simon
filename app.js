@@ -1,15 +1,17 @@
 console.log(`JavaScript loaded`)
-
+// Left & right lights and boxes - containers
 const leftIndicator = document.querySelector(".left-indicator")
 const rightIndicator = document.querySelector(".right-indicator")
 const leftGrid = document.querySelector(".left-grid")
 const rightGrid = document.querySelector(".right-grid")
 
+// Left & right lights and boxes - node lists
 const leftLights = leftIndicator.querySelectorAll(`div`)
-const leftBoxes = leftGrid.querySelectorAll(`div`)
+const leftBoxes = leftGrid.querySelectorAll(`div`) // <= Will be used for showing the answer?
 const rightLights = rightIndicator.querySelectorAll(`div`)
 const rightBoxes = rightGrid.querySelectorAll(`div`)
 
+// Initialization settings
 let roundNumber = 1
 let theAnswer = []
 let playerArr = []
@@ -17,23 +19,15 @@ let listening = false
 let selection
 let sequence = []
 
-const disableButtons = () => {
-    console.log(`*** Buttons disabled`)
-    listening = false
-    // Buttons turn (dark?) gray because they were disabled
-    rightBoxes.forEach(function(square) {
-        square.style.backgroundColor = `#626162`
-    })
-}
+// Callback(?) functions
 const enableButtons = () => {
     console.log(`*** Buttons enabled`)
+    // Right boxes turn light gray when listening
     listening = true
-    // Buttons turn (light?) gray because they were enabled
     rightBoxes.forEach(function(square) {
         square.style.backgroundColor = `#B2B0B3`
     })
 }
-
 const newAnswer = () => {
     theAnswer = []
     for(i=0;i<5;i++) {
@@ -41,19 +35,25 @@ const newAnswer = () => {
     }
     console.log(`*** The answer is: ${theAnswer}`)
 }
+const reset = () => {
+    console.log(`---------- * GAME RESET * ----------`)
+    newAnswer()
+    roundNumber = 1
+}
 
+// Main functions
 const computerTurn = () => {
-    // Turn right lights gray
-    rightLights.forEach(function(light) {
-        light.style.backgroundColor = `#696969`
-    })
     console.log(`Round ${roundNumber}: It's the computer's turn!`)
+    // Turn right squares dark gray
+    rightBoxes.forEach(function(square) {
+        square.style.backgroundColor = `#626162`
+    })
     sequence = []
     for(i=0;i<roundNumber;i++) {
         // Left side lights - one for each round
         sequence.push(theAnswer[i])
         leftLights[i].style.backgroundColor = `#00C000`
-        console.log(`> Building round sequence: ${sequence.length} / ${roundNumber}`)
+        setTimeout( () => console.log(`> Building round sequence: ${sequence.length} / ${roundNumber}`), 1000)
     }
     
     // this is where the computer should blink the sequence at the player
@@ -61,12 +61,6 @@ const computerTurn = () => {
     playerArr = []
     enableButtons()
     console.log(`It's your turn! Round sequence is: ${sequence}`)
-}
-
-const reset = () => {
-    console.log(`---------- * GAME RESET * ----------`)
-    newAnswer()
-    roundNumber = 1
 }
 
 function wrongClick() {
@@ -81,7 +75,6 @@ function wrongClick() {
         setTimeout( () => square.classList.remove(`red`), 1800)
     })
     reset()
-    disableButtons()
     setTimeout( () => computerTurn(), 1800)
 }
 
@@ -100,6 +93,7 @@ const win = () => {
     theAnswer = []
 }
 
+// Setting up button listeners and logic gates
 rightBoxes.forEach(button => {
     button.addEventListener(`click`, function() {
         selection = Number(button.id[10])
@@ -113,13 +107,14 @@ rightBoxes.forEach(button => {
                 console.log(`Round progress: ${playerArr.length} / ${roundNumber}. Sequence: ${sequence}`)
                 if(playerArr.length === roundNumber) {
                     console.log(`*** Round ${roundNumber} complete!`)
+                    // Stop accepting input, increment round number
+                    listening = false
                     roundNumber++
                     if(roundNumber > 5) {
-                        // Win the game
+                        // We're past round 5, we won the game!
                         return win()
                     }
                     else {
-                        disableButtons()
                         // Start computer turn, on a delay
                         setTimeout( () => computerTurn(), 500)
                     }
@@ -135,6 +130,7 @@ rightBoxes.forEach(button => {
     })
 })
 
+// Start game
 reset()
 setTimeout( () => computerTurn(), 500)
 // win()
