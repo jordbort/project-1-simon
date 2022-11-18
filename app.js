@@ -22,7 +22,7 @@ let sequence = []
 // Callback(?) functions
 const enableButtons = () => {
     console.log(`*** Buttons enabled`)
-    // Right boxes turn light gray when listening
+    // Right boxes turn light "gray" when listening
     listening = true
     rightBoxes.forEach(function(square) {
         square.style.backgroundColor = `#B2B0B3`
@@ -44,20 +44,24 @@ const reset = () => {
 // Main functions
 const computerTurn = () => {
     console.log(`Round ${roundNumber}: It's the computer's turn!`)
-    // Turn right lights dark gray
-    rightLights.forEach(function(light) {
+    // Reset left lights to "gray"
+    leftLights.forEach(function(light) {
         light.style.backgroundColor = `#696969`
     })
-    // Turn right squares dark gray
-    rightBoxes.forEach(function(square) {
-        square.style.backgroundColor = `#626162`
-    })
     sequence = []
-    // Compile lights and sequence
+    // Compile left lights and round sequence
     for(i=0;i<roundNumber;i++) {
         sequence.push(theAnswer[i])
         leftLights[i].style.backgroundColor = `#00C000`
     }
+    // Turn right lights "gray"
+    rightLights.forEach(function(light) {
+        light.style.backgroundColor = `#696969`
+    })
+    // Turn right squares "dark gray"
+    rightBoxes.forEach(function(square) {
+        square.style.backgroundColor = `#626162`
+    })
     
     // this is where the computer should somehow blink the sequence at the player 
     for(i=0;i<roundNumber;i++) {
@@ -121,12 +125,13 @@ rightBoxes.forEach(button => {
                         return win()
                     }
                     else {
+                        // Clicked box blinks "cyan"
+                        this.classList.add(`cyan`)
+                        setTimeout( () => this.classList.remove(`cyan`), 300)
                         // Start computer turn, on a delay
                         setTimeout( () => computerTurn(), 500)
                     }
                 }
-                this.classList.add(`cyan`)
-                setTimeout( () => this.classList.remove(`cyan`), 300)
             }
             else {
                 console.log(`*** Buttons disabled,`, selection, `was NOT correct!`)
