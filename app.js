@@ -55,7 +55,7 @@ const computerTurn = () => {
             light.style.backgroundColor = `#696969`
         })
     
-    // Compile left lights and round sequence
+    // Compile left green lights and round sequence
     sequence = []
     for(i=0;i<roundNumber;i++) {
         // console.log(`> Building left green lights:`, i+1)
@@ -76,8 +76,8 @@ const computerTurn = () => {
         leftBoxes.forEach(function(square) {
             if(Number(square.dataset.num) === sequence[blinkClock]) {
                 console.log(`> Blinking number`, blinkClock+1, `***`, sequence[blinkClock], `***`)
-                square.classList.add(`cyan`)
-                setTimeout( () => square.classList.remove(`cyan`), 300)
+                square.classList.add(`blue`)
+                setTimeout( () => square.classList.remove(`blue`), 300)
             }
         })
         blinkClock++
@@ -127,11 +127,11 @@ const win = () => {
         square.style.backgroundColor = `#696969`
     }), 300)
 
-    // Make all boxes blink "blue"
-    console.log(`*** ALL boxes: "blue"`)
+    // Make all boxes "cyan-win"
+    console.log(`*** ALL boxes: "cyan"`)
     rightBoxes.forEach(function(square) {
-        square.classList.add(`blue`)
-        setTimeout( () => square.classList.remove(`blue`), 300)
+        square.classList.add(`cyan-win`)
+        setTimeout( () => square.classList.remove(`cyan-win`), 300)
     })
     theAnswer = []
 }
@@ -199,4 +199,4 @@ rightBoxes.forEach(button => {
 
 // Start game
 reset()
-setTimeout( () => computerTurn(), 300)
+setTimeout( () => computerTurn(), 500)
