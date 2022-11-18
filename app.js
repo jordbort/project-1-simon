@@ -80,7 +80,44 @@ const computerTurn = () => {
     for(i=0;i<roundNumber;i++) {
         console.log(`>>> Blinking left box, ${i+1}: ***`, sequence[i], `***`)
     }
-    // leftBoxes.forEach()
+    
+    let cpuBlink = setInterval(function() {
+        leftBoxes.forEach(function(square) {
+            for(i=0;i<roundNumber;i++) {
+                if(Number(square.dataset.num) === sequence[i]) {
+                    console.log(square.dataset.num, sequence[i])
+                    square.classList.add(`cyan`)
+                    setTimeout( () => square.classList.remove(`cyan`), 300)
+                }
+            }
+            console.log(`>>> Exited the inner FOR loop`)
+        })
+        console.log(`>>> Exited the FOR EACH loop`)
+        clearInterval(cpuBlink)
+        console.log(`*** Timer cleared`)
+    }, 500)
+
+    // getBored() {
+    //     const bored = setInterval( () => {
+    //         if(this.canGetBored) {
+    //             if(this.boredom <= 0) {
+    //                 this.boredom = 0
+    //             }
+    //             this.boredom++
+    //             petBoredom.textContent = `Boredom: ${pet.boredom}`
+    //             if(this.boredom >= 12) {
+    //                 statusMsg.style.color = "#E00"
+    //                 statusMsg.textContent = `${this.name} got bored to death at age ${this.age}.`
+    //                 this.die()
+    //                 clearInterval(bored)
+    //                 return
+    //             }
+    //             if(this.boredom >= 6) {
+    //                 this.bored()
+    //             }
+    //         }
+    //     }, 3750)
+    // },
 
     // Empty our player array in preparation for their turn, and enable buttons
     console.log(`It's your turn! Round sequence is: ${sequence}`)
@@ -127,12 +164,13 @@ const win = () => {
     theAnswer = []
 }
 
-// Setting up button listeners and logic gates
+// Setting up button listeners, control flow, and logic gates
 rightBoxes.forEach(button => {
     button.addEventListener(`click`, function() {
 
         // "selection" variable takes the respective data (a string) from the HTML, and converts it to a number
         selection = Number(button.dataset.num)
+
         // Only if buttons are listening:
         if(listening) {
 
