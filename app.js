@@ -47,6 +47,9 @@ const computerTurn = () => {
     sequence = []
     for(i=0;i<roundNumber;i++) {
         sequence.push(theAnswer[i])
+        leftLights.forEach(function(light) {
+            // light.style.backgroundColor = `#B2B0B3`
+        })
         console.log(`> Building round sequence: ${sequence.length} / ${roundNumber}`)
     }
     // this is where the computer should blink the sequence at the player
