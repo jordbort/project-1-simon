@@ -42,7 +42,7 @@ const newAnswer = () => {
 const reset = () => {
     console.log(`---------- * GAME RESET * ----------`)
     newAnswer()
-    roundNumber = 5 // Set to 5 while testing last round
+    roundNumber = 1 // Set to 5 while testing last round
 }
 
 // Computer's turn: the right panel resets, the left panel's lights increment, and the round sequence is shown
@@ -73,56 +73,34 @@ const computerTurn = () => {
     // Turn right squares "dark gray"
     console.log(`*** Boxes: "dark gray"`)
     rightBoxes.forEach(function(square) {
-        square.style.backgroundColor = `#626162`
+        square.style.backgroundColor = `#696969`
     })
     
-    // this is where the computer should somehow blink the sequence at the player 
-    for(i=0;i<roundNumber;i++) {
-        console.log(`>>> Blinking left box, ${i+1}: ***`, sequence[i], `***`)
-    }
-    
+    // Computer blinks the sequence at the player 
+    let blinkClock = 0
     let cpuBlink = setInterval(function() {
         leftBoxes.forEach(function(square) {
-            for(i=0;i<roundNumber;i++) {
-                if(Number(square.dataset.num) === sequence[i]) {
-                    console.log(square.dataset.num, sequence[i])
-                    square.classList.add(`cyan`)
-                    setTimeout( () => square.classList.remove(`cyan`), 300)
-                }
+            if(Number(square.dataset.num) === sequence[blinkClock]) {
+                console.log(`> Blinking number`, blinkClock+1, `***`, sequence[blinkClock], `***`)
+                square.classList.add(`cyan`)
+                setTimeout( () => square.classList.remove(`cyan`), 300)
             }
-            console.log(`>>> Exited the inner FOR loop`)
         })
-        console.log(`>>> Exited the FOR EACH loop`)
-        clearInterval(cpuBlink)
-        console.log(`*** Timer cleared`)
+        blinkClock++
+        if(blinkClock === sequence.length) {
+            // Clear timer
+            console.log(`*** Timer cleared`)
+            clearInterval(cpuBlink)
+
+            // Empty player array, and enable buttons for next round after a pause
+            console.log(`It's your turn! Round sequence is: ${sequence}`)
+            playerArr = []
+            setTimeout( () => enableButtons(), 300)
+        }
+        else {
+            console.log(`sequence length:`, sequence.length)
+        }
     }, 500)
-
-    // getBored() {
-    //     const bored = setInterval( () => {
-    //         if(this.canGetBored) {
-    //             if(this.boredom <= 0) {
-    //                 this.boredom = 0
-    //             }
-    //             this.boredom++
-    //             petBoredom.textContent = `Boredom: ${pet.boredom}`
-    //             if(this.boredom >= 12) {
-    //                 statusMsg.style.color = "#E00"
-    //                 statusMsg.textContent = `${this.name} got bored to death at age ${this.age}.`
-    //                 this.die()
-    //                 clearInterval(bored)
-    //                 return
-    //             }
-    //             if(this.boredom >= 6) {
-    //                 this.bored()
-    //             }
-    //         }
-    //     }, 3750)
-    // },
-
-    // Empty our player array in preparation for their turn, and enable buttons
-    console.log(`It's your turn! Round sequence is: ${sequence}`)
-    playerArr = []
-    enableButtons()
 }
 
 function wrongClick() {
@@ -201,7 +179,7 @@ rightBoxes.forEach(button => {
 
                     // If not, start the computer's turn, on a delay
                     else {
-                        setTimeout( () => computerTurn(), 500)
+                        setTimeout( () => computerTurn(), 300)
                     }
                 }
 
@@ -222,5 +200,4 @@ rightBoxes.forEach(button => {
 
 // Start game
 reset()
-setTimeout( () => computerTurn(), 500)
-// win()
+setTimeout( () => computerTurn(), 300)
