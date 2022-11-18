@@ -17,19 +17,20 @@ let listening = false
 let selection
 let sequence = []
 
-// #626162
 const disableButtons = () => {
     console.log(`*** Buttons disabled`)
     listening = false
-    rightBoxes.forEach(function(box) {
-        box.style.backgroundColor = `#626162`
+    // Buttons turn (dark?) gray because they were disabled
+    rightBoxes.forEach(function(square) {
+        square.style.backgroundColor = `#626162`
     })
 }
 const enableButtons = () => {
     console.log(`*** Buttons enabled`)
     listening = true
-    rightBoxes.forEach(function(box) {
-        box.style.backgroundColor = `#B2B0B3`
+    // Buttons turn (light?) gray because they were enabled
+    rightBoxes.forEach(function(square) {
+        square.style.backgroundColor = `#B2B0B3`
     })
 }
 
@@ -42,17 +43,21 @@ const newAnswer = () => {
 }
 
 const computerTurn = () => {
-    disableButtons()
+    // Turn right lights gray
+    rightLights.forEach(function(light) {
+        light.style.backgroundColor = `#696969`
+    })
     console.log(`Round ${roundNumber}: It's the computer's turn!`)
     sequence = []
     for(i=0;i<roundNumber;i++) {
+        // Left side lights - one for each round
         sequence.push(theAnswer[i])
-        leftLights.forEach(function(light) {
-            // light.style.backgroundColor = `#B2B0B3`
-        })
+        leftLights[i].style.backgroundColor = `#00C000`
         console.log(`> Building round sequence: ${sequence.length} / ${roundNumber}`)
     }
+    
     // this is where the computer should blink the sequence at the player
+    
     playerArr = []
     enableButtons()
     console.log(`It's your turn! Round sequence is: ${sequence}`)
@@ -66,52 +71,34 @@ const reset = () => {
 
 function wrongClick() {
     listening = false
+    // Flash all right side red three times
     rightLights.forEach(function(light) {
         light.classList.add(`red`)
         setTimeout( () => light.classList.remove(`red`), 1800)
     })
-    rightBoxes.forEach(function(box) {
-        box.classList.add(`red`)
-        setTimeout( () => box.classList.remove(`red`), 1800)
+    rightBoxes.forEach(function(square) {
+        square.classList.add(`red`)
+        setTimeout( () => square.classList.remove(`red`), 1800)
     })
     reset()
+    disableButtons()
     setTimeout( () => computerTurn(), 1800)
 }
 
 const win = () => {
     listening = false
-    setTimeout( () => disableButtons(), 500)
+    //Turn right squares dark dray
+    setTimeout( () => rightBoxes.forEach(function(square) {
+        square.style.backgroundColor = `#696969`, 500
+    }), 500)
+    // setTimeout( make right boxes dark gray, 500)
     console.log(`You won! Buttons disabled: GAME OVER`)
-    rightBoxes.forEach(function(box) {
-        box.classList.add(`blue`)
-        setTimeout( () => box.classList.remove(`blue`), 500)
+    rightBoxes.forEach(function(square) {
+        square.classList.add(`blue`)
+        setTimeout( () => square.classList.remove(`blue`), 500)
     })
     theAnswer = []
 }
-
-// const checkSequence = () => {
-//     if(roundNumber > 5) {
-//         win()
-//     }
-//     else {
-//         computerTurn()
-//     }
-// }
-            
-// const buildPlayerArr = () => {
-//     console.log(`Round progress: ${playerArr.length} / ${roundNumber}. Sequence: ${sequence}`)
-//     if(playerArr.length === roundNumber) {
-//         console.log(`*** Round ${roundNumber} complete!`)
-//         roundNumber++
-//         // checkSequence()
-//         if(roundNumber > 5) {
-//             win()
-//         }
-//         else {
-//             computerTurn()
-//         }
-//     }
-// }
 
 rightBoxes.forEach(button => {
     button.addEventListener(`click`, function() {
@@ -120,22 +107,23 @@ rightBoxes.forEach(button => {
             console.log(`*** You pressed`, selection, `, Expecting`, theAnswer[playerArr.length])
             if(selection === theAnswer[playerArr.length]) {
                 playerArr.push(selection)
+                // Add one green light per correct click
+                rightLights[playerArr.length-1].style.backgroundColor = `#00C000`
                 console.log(`***`, selection, `was correct! Your array: ${playerArr}`)
-                
-                // buildPlayerArr()
                 console.log(`Round progress: ${playerArr.length} / ${roundNumber}. Sequence: ${sequence}`)
                 if(playerArr.length === roundNumber) {
                     console.log(`*** Round ${roundNumber} complete!`)
                     roundNumber++
-                    // checkSequence()
                     if(roundNumber > 5) {
+                        // Win the game
                         return win()
                     }
                     else {
-                        computerTurn()
+                        disableButtons()
+                        // Start computer turn, on a delay
+                        setTimeout( () => computerTurn(), 500)
                     }
                 }
-                                
                 this.classList.add(`cyan`)
                 setTimeout( () => this.classList.remove(`cyan`), 300)
             }
@@ -146,7 +134,7 @@ rightBoxes.forEach(button => {
         }
     })
 })
-    
+
 reset()
-computerTurn()
+setTimeout( () => computerTurn(), 500)
 // win()
