@@ -19,15 +19,17 @@ let listening = false
 let selection
 let sequence = []
 
-// Callback(?) functions
+// Let boxes listen, and make them "light gray"
 const enableButtons = () => {
     console.log(`*** Buttons: "light gray" and enabled`)
     listening = true
-    // Right boxes turn "light gray" when listening
+
     rightBoxes.forEach(function(square) {
         square.style.backgroundColor = `#B2B0B3`
     })
 }
+
+// Generate new final answer sequence for the game
 const newAnswer = () => {
     theAnswer = []
     for(i=0;i<5;i++) {
@@ -35,34 +37,41 @@ const newAnswer = () => {
     }
     console.log(`*** The answer is: ${theAnswer}`)
 }
+
+// Generate new answer and set round number back to 1
 const reset = () => {
     console.log(`---------- * GAME RESET * ----------`)
     newAnswer()
-    roundNumber = 1
+    roundNumber = 1 // Set to 5 while testing last round
 }
 
-// Main functions
+// Computer's turn: the right panel resets, the left panel's lights increment, and the round sequence is shown
 const computerTurn = () => {
     console.log(`Round ${roundNumber}: It's the computer's turn!`)
+
     // Reset left lights to "gray"
-    console.log(`*** Left lights reset to "gray"`)
+    console.log(`*** Left lights grayed out`)
     leftLights.forEach(function(light) {
         light.style.backgroundColor = `#696969`
     })
-    sequence = []
+
     // Compile left lights and round sequence
+    sequence = []
     for(i=0;i<roundNumber;i++) {
         console.log(`> Building left green lights:`, i+1)
         sequence.push(theAnswer[i])
         leftLights[i].style.backgroundColor = `#00C000`
     }
     console.log(`> All left green lights are lit!`)
+
     // Turn right lights "gray"
+    console.log(`*** Right lights grayed out`)
     rightLights.forEach(function(light) {
         light.style.backgroundColor = `#696969`
     })
-    console.log(`*** Boxes: "dark gray"`)
+
     // Turn right squares "dark gray"
+    console.log(`*** Boxes: "dark gray"`)
     rightBoxes.forEach(function(square) {
         square.style.backgroundColor = `#626162`
     })
@@ -71,17 +80,19 @@ const computerTurn = () => {
     for(i=0;i<roundNumber;i++) {
         console.log(`>>> Blinking left box, ${i+1}: ***`, sequence[i], `***`)
     }
-    
+
+    // Empty our player array in preparation for their turn, and enable buttons
+    console.log(`It's your turn! Round sequence is: ${sequence}`)
     playerArr = []
     enableButtons()
-    console.log(`It's your turn! Round sequence is: ${sequence}`)
 }
 
 function wrongClick() {
     console.log(`*** Buttons no longer listening`)
     listening = false
-    console.log(`*** ALL boxes: "red"`)
+
     // Flash all right side red three times
+    console.log(`*** ALL right lights/boxes: "red"`)
     rightLights.forEach(function(light) {
         light.classList.add(`red`)
         setTimeout( () => light.classList.remove(`red`), 1800)
@@ -90,19 +101,24 @@ function wrongClick() {
         square.classList.add(`red`)
         setTimeout( () => square.classList.remove(`red`), 1800)
     })
+
+    // Reset game and start computer's turn
     reset()
     setTimeout( () => computerTurn(), 1800)
 }
 
 const win = () => {
-    console.log(`You won! Buttons disabled: GAME OVER`)
-    listening = false
+    console.log(`You won! GAME OVER`)
+    // listening = false // Is this redundant?
+
     //Turn on timer to make right squares "dark gray"
     setTimeout( () => rightBoxes.forEach(function(square) {
+        console.log(`*** Boxes: "dark gray"`)
         square.style.backgroundColor = `#696969`
     }), 300)
-    console.log(`*** ALL boxes: "blue"`)
+
     // Make all boxes blink "blue"
+    console.log(`*** ALL boxes: "blue"`)
     rightBoxes.forEach(function(square) {
         square.classList.add(`blue`)
         setTimeout( () => square.classList.remove(`blue`), 300)
@@ -113,35 +129,49 @@ const win = () => {
 // Setting up button listeners and logic gates
 rightBoxes.forEach(button => {
     button.addEventListener(`click`, function() {
-        selection = Number(button.id[10])
+
+        selection = Number(button.id[10])   // change this to the new "data" thing you learned
+        // Only if buttons are listening:
         if(listening) {
+
+            // Decide whether the box clicked was correct
             console.log(`*** You pressed`, selection, `, Expecting`, theAnswer[playerArr.length])
             if(selection === theAnswer[playerArr.length]) {
                 playerArr.push(selection)
-                // Add one green light per correct click
-                rightLights[playerArr.length-1].style.backgroundColor = `#00C000`
+
+                // Add one green light per correct click if correct
                 console.log(`***`, selection, `was correct! Your array: ${playerArr}`)
                 console.log(`Round progress: ${playerArr.length} / ${roundNumber}. Sequence: ${sequence}`)
+                rightLights[playerArr.length-1].style.backgroundColor = `#00C000`
+
+                // If that was the last click of the round:
                 if(playerArr.length === roundNumber) {
                     console.log(`*** Round ${roundNumber} complete!`)
+
                     // Stop accepting input, increment round number
-                    listening = false
                     console.log(`*** Buttons no longer listening`)
+                    listening = false
                     roundNumber++
+
+                    // Is there another round to play?
                     if(roundNumber > 5) {
                         // We're past round 5, we won the game!
                         return win()
                     }
+
+                    // If not, start the computer's turn, on a delay
                     else {
-                        // Start computer turn, on a delay
                         setTimeout( () => computerTurn(), 500)
                     }
                 }
-                // Clicked box blinks "cyan"
+
+                // Box blinks "cyan", if we didn't click the wrong box, or reach the end of the game
                 console.log(`*** Button: "cyan"`)
                 this.classList.add(`cyan`)
                 setTimeout( () => this.classList.remove(`cyan`), 300)
             }
+
+            // If the wrong box was clicked:
             else {
                 console.log(`***`, selection, `was NOT correct!`)
                 wrongClick()
