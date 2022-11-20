@@ -24,6 +24,23 @@ let selection
 let sequence = []
 
 // Let boxes listen, and make them "light gray"
+function enableReplayButton() {
+    replayButton.addEventListener(`click`, function activate() {
+        gameBoard.classList.remove(`below-screen`)
+        gameBoard.classList.add(`slide-up-in`)
+        replayButton.classList.add(`slide-up-out`)
+        reset()
+        setTimeout( () => gameBoard.classList.remove(`slide-up-in`), 300)
+        setTimeout( () => replayButton.classList.add(`above-screen`), 300)
+        setTimeout( () => replayButton.classList.remove(`slide-up-out`), 300)
+        setTimeout( () => computerTurn(), 800)
+        replayButton.removeEventListener(`click`, activate)
+    })
+    rightLights.forEach(function(light) {
+        light.style.backgroundColor = `#696969`
+    })
+}
+
 const enableButtons = () => {
     console.log(`*** Buttons: "light gray" and enabled`)
     listening = true
@@ -46,7 +63,7 @@ const newAnswer = () => {
 const reset = () => {
     console.log(`---------- * GAME RESET * ----------`)
     newAnswer()
-    roundNumber = 5 // Set to 5 while testing last round
+    roundNumber = 1 // Set to 5 while testing last round
 }
 
 // Computer's turn: the right panel resets, the left panel's lights increment, and the round sequence is shown
@@ -149,6 +166,7 @@ const win = () => {
     setTimeout( () => replayButton.classList.add(`slide-down-in`), 2000)
     setTimeout( () => replayButton.classList.remove(`above-screen`), 2000)
     setTimeout( () => replayButton.classList.remove(`slide-down-in`), 2300)
+    setTimeout( () => enableReplayButton(), 2300)
     theAnswer = []
 }
 
