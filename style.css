@@ -18,7 +18,7 @@ body {
 
 /* Class styling */
 .text-container {
-    background-color: rgba(255, 255, 255, 0.4);
+    /* background-color: rgba(255, 255, 255, 0.4); */
     position: absolute;
     top: 46.5vh;
     padding: 5px 10px 5px 10px;
@@ -102,9 +102,11 @@ body {
 }
 .above-screen {
     transform: translate(0vh, -100vh);
+    visibility: hidden;
 }
 .below-screen {
     transform: translate(0vh, 100vh);
+    visibility: hidden
 }
 
 /* ID styling */

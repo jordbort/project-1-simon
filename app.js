@@ -1,5 +1,8 @@
 console.log(`*** Buttons aren't listening yet`)
 // Left & right lights and boxes - containers
+const startButton = document.querySelector("#start-button")
+const taskCompleted = document.querySelector("#task-completed")
+const replayButton = document.querySelector("#replay-button")
 const gameBoard = document.querySelector(".game-board")
 const leftIndicator = document.querySelector(".left-indicator")
 const rightIndicator = document.querySelector(".right-indicator")
@@ -43,7 +46,7 @@ const newAnswer = () => {
 const reset = () => {
     console.log(`---------- * GAME RESET * ----------`)
     newAnswer()
-    roundNumber = 1 // Set to 5 while testing last round
+    roundNumber = 5 // Set to 5 while testing last round
 }
 
 // Computer's turn: the right panel resets, the left panel's lights increment, and the round sequence is shown
@@ -134,10 +137,34 @@ const win = () => {
         square.classList.add(`cyan-win`)
         setTimeout( () => square.classList.remove(`cyan-win`), 300)
     })
+    taskCompleted.classList.add(`slide-up-in`)
+    taskCompleted.classList.remove(`below-screen`)
+    setTimeout( () => taskCompleted.classList.remove(`slide-up-in`), 300)
+    setTimeout( () => gameBoard.classList.add(`slide-down-out`), 600)
+    setTimeout( () => gameBoard.classList.remove(`slide-down-out`), 900)
+    setTimeout( () => gameBoard.classList.add(`below-screen`), 900)
+    setTimeout( () => taskCompleted.classList.add(`slide-up-out`), 1200)
+    setTimeout( () => taskCompleted.classList.add(`above-screen`), 1600)
+    setTimeout( () => taskCompleted.classList.remove(`slide-up-out`), 1600)
+    setTimeout( () => replayButton.classList.add(`slide-down-in`), 2000)
+    setTimeout( () => replayButton.classList.remove(`above-screen`), 2000)
+    setTimeout( () => replayButton.classList.remove(`slide-down-in`), 2300)
     theAnswer = []
 }
 
 // Setting up button listeners, control flow, and logic gates
+startButton.addEventListener(`click`, function activate() {
+    gameBoard.classList.remove(`below-screen`)
+    gameBoard.classList.add(`slide-up-in`)
+    startButton.classList.add(`slide-up-out`)
+    reset()
+    setTimeout( () => gameBoard.classList.remove(`slide-up-in`), 300)
+    setTimeout( () => startButton.classList.add(`above-screen`), 300)
+    setTimeout( () => startButton.classList.remove(`slide-up-out`), 300)
+    setTimeout( () => computerTurn(), 800)
+    startButton.removeEventListener(`click`, activate)
+})
+
 rightBoxes.forEach(button => {
     button.addEventListener(`click`, function() {
 
@@ -197,9 +224,3 @@ rightBoxes.forEach(button => {
         }
     })
 })
-
-// Start game
-// gameBoard.style.
-// gameBoard.classList.add(`slide-down-in`)
-// reset()
-// setTimeout( () => computerTurn(), 500)
