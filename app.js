@@ -151,7 +151,7 @@ rightBoxes.forEach(button => {
             if(selection === theAnswer[playerArr.length]) {
                 playerArr.push(selection)
 
-                // Add one green light per correct click if correct
+                // Add one green light per correct click
                 console.log(`***`, selection, `was correct! Your array: ${playerArr}`)
                 console.log(`Round progress: ${playerArr.length} / ${roundNumber}. Sequence: ${sequence}`)
                 rightLights[playerArr.length-1].style.backgroundColor = `#00C000`
@@ -198,5 +198,5 @@ rightBoxes.forEach(button => {
 })
 
 // Start game
-reset()
-setTimeout( () => computerTurn(), 500)
+// reset()
+// setTimeout( () => computerTurn(), 500)
