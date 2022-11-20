@@ -1,3 +1,7 @@
+* {
+    border: solid red 4px;
+}
+
 body {
     background: url(./among-us-reactor.jpg);
     background-repeat: no-repeat;
@@ -7,21 +11,33 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 37px;
     letter-spacing: -0.03em;
-    text-align: center;
+    /* position: absolute; */
+    /* text-align: right; */
     font-weight: bold;
     -webkit-text-stroke: #000000;
     -webkit-text-stroke-width: 2.2px;
+    margin: -1vh -1vw;
+    padding: 0;
     color: #FFFFFF;
     display: flex;
     justify-content: center;
+    height: 90vh;
+    width: 100vw;
+    /* overflow: hidden; */
 }
-
+/* p {
+    position: absolute;
+    right: 0;
+    top: 700px;
+    overflow: hidden;
+} */
 /* Class styling */
 .text-container {
     /* background-color: rgba(255, 255, 255, 0.4); */
-    position: absolute;
-    top: 46.5vh;
-    padding: 5px 10px 5px 10px;
+    /* position: absolute; */
+    /* top: 46.5%; */
+    /* padding: 5px 10px 5px 10px; */
+    padding: 5px 10px;
 }
 
 /* .start {} */
@@ -32,8 +48,9 @@ body {
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 90vh;
-    margin-top: 8%;
+    height: 100%;
+    /* margin: 0; */
+    /* padding: 0; */
     gap: 0px;
 }
 .left-panel, .right-panel {
@@ -44,15 +61,16 @@ body {
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    width: 75%;
-    height: 35vh;
+    width: 100%;
+    height: 100%;
 }
 .left-indicator, .right-indicator {
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-around;
     width: 100%;
-    margin-top: 1%;
+    height: 100%;
+    margin: 0;
 }
 .left-grid {
     background-color: #000000;
@@ -101,12 +119,12 @@ body {
     height: 42px;
 }
 .above-screen {
-    transform: translate(0vh, -100vh);
-    visibility: hidden;
+    transform: translate(0vw, -100vh);
+    /* visibility: hidden; */
 }
 .below-screen {
-    transform: translate(0vh, 100vh);
-    visibility: hidden
+    transform: translate(0vw, 100vh);
+    /* visibility: hidden */
 }
 
 /* ID styling */
@@ -206,23 +224,24 @@ Right squares - "Red" hex code: #D12F00
     animation-timing-function: linear;
 }
 @keyframes slide-up-in {
-    0% { transform: translate(0vh, 100vh);}
-    100% { transform: translate(0vh, 0vh);}
+    0% { transform: translate(0vw, 100vh);}
+    100% { transform: translate(0vw, 0vh);}
 }
 @keyframes slide-down-in {
-    0% { transform: translate(0vh, -100vh);}
-    100% { transform: translate(0vh, 0vh);}
+    0% { transform: translate(0vw, -100vh);}
+    100% { transform: translate(0vw, 0vh);}
 }
 @keyframes slide-up-out {
-    0% { transform: translate(0vh, 0vh);}
-    100% { transform: translate(0vh, -100vh);}
+    0% { transform: translate(0vw, 0vh);}
+    100% { transform: translate(0vw, -100vh);}
 }
 @keyframes slide-down-out {
-    0% { transform: translate(0vh, 0vh);}
-    100% { transform: translate(0vh, 100vh);}
+    0% { transform: translate(0vw, 0vh);}
+    100% { transform: translate(0vw, 100vh);}
 }
 
 /* Media queries */
+/* 
 @media screen and (orientation: landscape) and (min-width: 1350px) {
     body {
         font-size: 90px;
@@ -231,14 +250,14 @@ Right squares - "Red" hex code: #D12F00
     }    
     .game-board {
         justify-content: space-between;
-        width: 60%;
-        height: 60vh;
-        margin-top: 9%;
+        /* width: 60%; */
+        /* height: 60%; */
+        /* margin-top: 9%; */
     }
     .left-panel, .right-panel {
         border-width: 38px;
         width: 40%;
-        height: 53vh;
+        height: 53%;
     }
     .left-indicator, .right-indicator {
         width: 90%;
@@ -269,4 +288,4 @@ Right squares - "Red" hex code: #D12F00
         width: 72px;
         height: 72px;
     }
-}
+} */
