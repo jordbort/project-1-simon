@@ -11,30 +11,29 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 37px;
     letter-spacing: -0.03em;
-    /* position: absolute; */
-    /* text-align: right; */
     font-weight: bold;
     -webkit-text-stroke: #000000;
     -webkit-text-stroke-width: 2.2px;
-    margin: -1vh -1vw;
-    padding: 0;
+    margin: 0 auto;
+    /* padding: 0; */
     color: #FFFFFF;
     display: flex;
     justify-content: center;
-    height: 90vh;
-    width: 100vw;
+    align-items: center;
+    /* height: 100vh; */
+    /* width: 100vw; */
     /* overflow: hidden; */
 }
-/* p {
+p {
     position: absolute;
     right: 0;
     top: 700px;
     overflow: hidden;
-} */
+}
 /* Class styling */
 .text-container {
     /* background-color: rgba(255, 255, 255, 0.4); */
-    /* position: absolute; */
+    position: absolute;
     /* top: 46.5%; */
     /* padding: 5px 10px 5px 10px; */
     padding: 5px 10px;
@@ -45,33 +44,47 @@ body {
 .game-board {
     display: flex;
     flex-flow: row wrap;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    width: 80%;
-    height: 80%;
-    /* margin: 0; */
+    width: 90%;
+    height: 100%;
+    background-color: rgba(0, 0, 255, 0.4);
+    /* margin-top: 10vh; */
     /* padding: 0; */
-    gap: 0px;
+    /* gap: 0px; */
 }
 .left-panel, .right-panel {
     background-color: #AAAAAA;
     border-style: outset;
     border-width: 24px;
+    /* margin: 10% 0 0 0; */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     width: 40%;
-    height: 60%;
+    height: 100%;
 }
 .left-indicator, .right-indicator {
     display: flex;
     flex-flow: row nowrap;
-    justify-content: space-between;
-    width: 50%;
-    height: 50%;
-    margin: 0;
-    padding: 0;
+    justify-content: space-around;
+    width: 90%;
+    height: 100%;
+    /* margin: 0 auto; */
+    /* padding: 0; */
+}
+.left-light, .right-light {
+    background-color: #696969;
+    border-style: solid;
+    border-color: #333333;
+    border-width: 3px;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    margin: 3% 0 0 0;
+    /* margin: 50px; */
+    /* padding: 0; */
 }
 .left-grid {
     background-color: #000000;
@@ -79,9 +92,9 @@ body {
     border-color: #D1D0D1;
     border-width: 9px;
     border-radius: 5%;
-    /* width: 100%; */
-    /* height: 100%; */
-    /* margin: 0; */
+    width: 100%;
+    /* height: 50%; */
+    margin: 10px 0 10px 0;
     /* padding: 0; */
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -91,39 +104,32 @@ body {
 }
 .right-grid {
     display: grid;
+    background-color: green;
     /* position: absolute; */
     /* bottom: 0; */
     /* width: 100%; */
     /* height: 100%; */
+    /* margin: 100%; */
+    margin: 10px 0 10px 0;
+    /* padding: 0; */
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
     grid-column-gap: 8px;
     grid-row-gap: 8px;
 }
-.left-light, .right-light {
-    background-color: #696969;
-    border-style: solid;
-    border-color: #333333;
-    border-width: 3px;
-    border-radius: 50%;
-    width: 20%;
-    height: 20%;
-    margin: 0;
-    padding: 0;
-}
 .left-box {
     background-color: #000000;
     border: none;
     border-radius: 0;
-    /* width: 200%; */
-    /* height: 200%; */
+    width: 56px;
+    height: 56px;
 }
 .right-box {
     border-style: outset;
     border-width: 8px;
     background-color: #696969;
-    /* width: 200%; */
-    /* height: 200%; */
+    width: 40px;
+    height: 40px;
 }
 .above-screen {
     transform: translate(0vw, -100vh);
@@ -248,8 +254,7 @@ Right squares - "Red" hex code: #D12F00
 }
 
 /* Media queries */
-/* 
-@media screen and (orientation: landscape) and (min-width: 1350px) {
+/* @media screen and (orientation: landscape) and (min-width: 1350px) {
     body {
         font-size: 90px;
         -webkit-text-stroke: #000000;
@@ -257,9 +262,9 @@ Right squares - "Red" hex code: #D12F00
     }    
     .game-board {
         justify-content: space-between;
-        /* width: 60%; */
-        /* height: 60%; */
-        /* margin-top: 9%; */
+        width: 60%;
+        height: 60%;
+        margin-top: 9%;
     }
     .left-panel, .right-panel {
         border-width: 38px;
