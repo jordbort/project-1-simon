@@ -5,9 +5,12 @@ body {
     background-attachment: fixed;
     background-size: cover;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 60px;
+    font-size: 37px;
+    letter-spacing: -0.03em;
+    text-align: center;
+    font-weight: bold;
     -webkit-text-stroke: #000000;
-    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-width: 2.2px;
     color: #FFFFFF;
     display: flex;
     justify-content: center;
@@ -19,7 +22,7 @@ body {
     /* transparency? */
     border: solid red 2px;
     position: absolute;
-    top: 45.3vh;
+    top: 46.5vh;
 }
 
 /* .start {} */
@@ -172,7 +175,7 @@ Right squares - "Red" hex code: #D12F00
     body {
         font-size: 90px;
         -webkit-text-stroke: #000000;
-        -webkit-text-stroke-width: 3px;
+        -webkit-text-stroke-width: 4px;
     }    
     .game-board {
         justify-content: space-between;
