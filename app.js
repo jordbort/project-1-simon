@@ -1,5 +1,6 @@
 console.log(`*** Buttons aren't listening yet`)
 // Left & right lights and boxes - containers
+const gameBoard = document.querySelector(".game-board")
 const leftIndicator = document.querySelector(".left-indicator")
 const rightIndicator = document.querySelector(".right-indicator")
 const leftGrid = document.querySelector(".left-grid")
@@ -198,5 +199,7 @@ rightBoxes.forEach(button => {
 })
 
 // Start game
+// gameBoard.style.
+// gameBoard.classList.add(`slide-down-in`)
 // reset()
 // setTimeout( () => computerTurn(), 500)

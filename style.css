@@ -18,10 +18,10 @@ body {
 
 /* Class styling */
 .text-container {
-    background-color: rgba(255, 255, 255, 0.5);
-    border: solid red 2px;
+    background-color: rgba(255, 255, 255, 0.4);
     position: absolute;
     top: 46.5vh;
+    padding: 5px 10px 5px 10px;
 }
 
 /* .start {} */
@@ -100,6 +100,12 @@ body {
     width: 42px;
     height: 42px;
 }
+.above-screen {
+    transform: translate(0vh, -100vh);
+}
+.below-screen {
+    transform: translate(0vh, 100vh);
+}
 
 /* ID styling */
 #left-box-1 { grid-area: 1 / 1 / 2 / 2; }
@@ -171,28 +177,28 @@ Right squares - "Red" hex code: #D12F00
 
 .slide-up-in {
     animation: slide-up-in;
-    animation-duration: 1s;
+    animation-duration: 0.3s;
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
     animation-timing-function: linear;
 }
 .slide-down-in {
     animation: slide-down-in;
-    animation-duration: 1s;
+    animation-duration: 0.3s;
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
     animation-timing-function: linear;
 }
 .slide-up-out {
     animation: slide-up-out;
-    animation-duration: 1s;
+    animation-duration: 0.3s;
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
     animation-timing-function: linear;
 }
 .slide-down-out {
     animation: slide-down-out;
-    animation-duration: 1s;
+    animation-duration: 0.3s;
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
     animation-timing-function: linear;
