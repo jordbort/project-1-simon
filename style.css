@@ -45,10 +45,10 @@ body {
 .game-board {
     display: flex;
     flex-flow: row wrap;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    width: 100%;
-    height: 100%;
+    width: 80%;
+    height: 80%;
     /* margin: 0; */
     /* padding: 0; */
     gap: 0px;
@@ -59,18 +59,19 @@ body {
     border-width: 24px;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
-    width: 100%;
-    height: 100%;
+    width: 40%;
+    height: 60%;
 }
 .left-indicator, .right-indicator {
     display: flex;
     flex-flow: row nowrap;
-    justify-content: space-around;
-    width: 100%;
-    height: 100%;
+    justify-content: space-between;
+    width: 50%;
+    height: 50%;
     margin: 0;
+    padding: 0;
 }
 .left-grid {
     background-color: #000000;
@@ -78,18 +79,22 @@ body {
     border-color: #D1D0D1;
     border-width: 9px;
     border-radius: 5%;
+    /* width: 100%; */
+    /* height: 100%; */
+    /* margin: 0; */
+    /* padding: 0; */
     display: grid;
-    justify-items: center;
-    align-items: center;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
-    grid-column-gap: 0px;
-    grid-row-gap: 0px;
+    grid-column-gap: 0;
+    grid-row-gap: 0;
 }
 .right-grid {
     display: grid;
-    justify-items: center;
-    align-items: center;
+    /* position: absolute; */
+    /* bottom: 0; */
+    /* width: 100%; */
+    /* height: 100%; */
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
     grid-column-gap: 8px;
@@ -101,22 +106,24 @@ body {
     border-color: #333333;
     border-width: 3px;
     border-radius: 50%;
-    width: 20px;
-    height: 20px;
+    width: 20%;
+    height: 20%;
+    margin: 0;
+    padding: 0;
 }
 .left-box {
     background-color: #000000;
     border: none;
     border-radius: 0;
-    width: 60px;
-    height: 60px;
+    /* width: 200%; */
+    /* height: 200%; */
 }
 .right-box {
     border-style: outset;
     border-width: 8px;
     background-color: #696969;
-    width: 42px;
-    height: 42px;
+    /* width: 200%; */
+    /* height: 200%; */
 }
 .above-screen {
     transform: translate(0vw, -100vh);
