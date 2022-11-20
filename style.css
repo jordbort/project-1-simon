@@ -19,7 +19,6 @@ body {
 /* Class styling */
 .text-container {
     background-color: rgba(255, 255, 255, 0.5);
-    /* transparency? */
     border: solid red 2px;
     position: absolute;
     top: 46.5vh;
@@ -168,6 +167,51 @@ Right squares - "Red" hex code: #D12F00
 }
 @keyframes cyan-win {
     0% { background-color: #327DBD; }
+}
+
+.slide-up-in {
+    animation: slide-up-in;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-timing-function: linear;
+}
+.slide-down-in {
+    animation: slide-down-in;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-timing-function: linear;
+}
+.slide-up-out {
+    animation: slide-up-out;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-timing-function: linear;
+}
+.slide-down-out {
+    animation: slide-down-out;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-timing-function: linear;
+}
+@keyframes slide-up-in {
+    0% { transform: translate(0vh, 100vh);}
+    100% { transform: translate(0vh, 0vh);}
+}
+@keyframes slide-down-in {
+    0% { transform: translate(0vh, -100vh);}
+    100% { transform: translate(0vh, 0vh);}
+}
+@keyframes slide-up-out {
+    0% { transform: translate(0vh, 0vh);}
+    100% { transform: translate(0vh, -100vh);}
+}
+@keyframes slide-down-out {
+    0% { transform: translate(0vh, 0vh);}
+    100% { transform: translate(0vh, 100vh);}
 }
 
 /* Media queries */
