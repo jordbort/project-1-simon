@@ -35,8 +35,9 @@ body {
     flex-flow: row wrap;
     justify-content: center;
     align-items: center;
-    width: 90%;
-    height: 100%;
+    width: 95%;
+    height: 50%;
+    margin-top: -150px;
 }
 .left-panel, .right-panel {
     background-color: #AAAAAA;
@@ -49,6 +50,7 @@ body {
     align-items: center;
     width: 45%;
     height: 250px;
+    /* max-width: 200px; */
 }
 .left-indicator, .right-indicator {
     display: flex;
@@ -225,7 +227,7 @@ body {
         justify-content: space-between;
         width: 60%;
         height: 50%;
-        margin-top: -5%;
+        margin-top: -20px;
     }
     .left-panel, .right-panel {
         border-width: 38px;

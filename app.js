@@ -63,7 +63,7 @@ const newAnswer = () => {
 const reset = () => {
     console.log(`---------- * GAME RESET * ----------`)
     newAnswer()
-    roundNumber = 5 // Set to 5 while testing last round
+    roundNumber = 1 // Set to 5 while testing last round
 }
 
 // Computer's turn: the right panel resets, the left panel's lights increment, and the round sequence is shown
