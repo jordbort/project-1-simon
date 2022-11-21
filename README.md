@@ -1,5 +1,5 @@
 # Project 1: Simon (sus version)
-This is my first project for General Assembly's Software Engineering immersive program! It is a Simon-like game in the style of the long task in reactor from the game "Among Us".
+This is my first project for General Assembly's Software Engineering immersive program! It is a Simon-like game in the style of the long task in reactor from the game "Among Us". You can play it at this deployed page link: https://jordbort.github.io/project-1-simon/
 
 ## Screenshots
 ![Screenshot from 2022-11-20 21-38-51](https://user-images.githubusercontent.com/115664302/202954385-cb156440-b3bf-4ef2-a09b-a548fdafd252.png)
@@ -29,7 +29,7 @@ After the game is finished, a "Play again?" button appears on screen for the pla
 * JavaScript
 
 ## Getting Started
-In order to play the game, please download all the included files to a folder, and open the `index.html` file. Click the "Start reactor" button to begin! If you finish the game, you have the option to play again by clicking the "Replay?" button.
+In order to play the game, please click the deployed link above, or download all the included files to a folder and open the `index.html` file. Click the "Start reactor" button to begin! If you finish the game, you have the option to play again by clicking the "Replay?" button.
 
 ## Next Steps
 Here are some additional updates/enhancements I have in mind for the future:
