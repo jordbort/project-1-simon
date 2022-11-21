@@ -10,7 +10,7 @@ This is my first project for General Assembly's Software Engineering immersive p
 * JavaScript
 
 ## Getting Started
-In order to play the game, please download the included files (`index.html`, `style.css`, `app.js`) to a folder, and open the `index.html` file. Click the "Start reactor" button to begin! If you finish the game, you have the option to play again by clicking the "Replay?" button.
+In order to play the game, please download all the included files to a folder, and open the `index.html` file. Click the "Start reactor" button to begin! If you finish the game, you have the option to play again by clicking the "Replay?" button.
 
 ## Next Steps
 Here are some additional updates/enhancements I have in mind for the future:
