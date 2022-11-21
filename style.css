@@ -23,14 +23,9 @@ body {
 
 /* Class styling */
 .text-container {
-    background-color: rgba(255, 255, 255, 0.3);
     position: absolute;
     padding: 5px 10px;
 }
-#start-button:hover, #replay-button:hover {
-    color: #FFFF00;
-}
-
 .game-board {
     display: flex;
     flex-flow: row wrap;
@@ -51,7 +46,6 @@ body {
     align-items: center;
     width: 45%;
     height: 250px;
-    /* max-width: 200px; */
 }
 .left-indicator, .right-indicator {
     display: flex;
@@ -116,6 +110,12 @@ body {
 }
 
 /* ID styling */
+#start-button, #replay-button {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+#start-button:hover, #replay-button:hover {
+    color: #FFFF00;
+}
 #left-box-1 { grid-area: 1 / 1 / 2 / 2; }
 #left-box-2 { grid-area: 1 / 2 / 2 / 3; }
 #left-box-3 { grid-area: 1 / 3 / 2 / 4; }
@@ -177,12 +177,20 @@ body {
     animation-fill-mode: forwards;
     animation-timing-function: linear;
 }
+@keyframes slide-up-in {
+    0% {transform: translate(0vw, 100vh);}
+    100% {transform: translate(0vw, 0vh);}
+}
 .slide-down-in {
     animation: slide-down-in;
     animation-duration: 0.3s;
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
     animation-timing-function: linear;
+}
+@keyframes slide-down-in {
+    0% {transform: translate(0vw, -100vh);}
+    100% {transform: translate(0vw, 0vh);}
 }
 .slide-up-out {
     animation: slide-up-out;
@@ -191,24 +199,16 @@ body {
     animation-fill-mode: forwards;
     animation-timing-function: linear;
 }
+@keyframes slide-up-out {
+    0% {transform: translate(0vw, 0vh);}
+    100% {transform: translate(0vw, -100vh);}
+}
 .slide-down-out {
     animation: slide-down-out;
     animation-duration: 0.3s;
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
     animation-timing-function: linear;
-}
-@keyframes slide-up-in {
-    0% {transform: translate(0vw, 100vh);}
-    100% {transform: translate(0vw, 0vh);}
-}
-@keyframes slide-down-in {
-    0% {transform: translate(0vw, -100vh);}
-    100% {transform: translate(0vw, 0vh);}
-}
-@keyframes slide-up-out {
-    0% {transform: translate(0vw, 0vh);}
-    100% {transform: translate(0vw, -100vh);}
 }
 @keyframes slide-down-out {
     0% {transform: translate(0vw, 0vh);}

@@ -18,9 +18,9 @@ const rightBoxes = rightGrid.querySelectorAll(`div`)
 let roundNumber = 1
 let theAnswer = []
 let playerArr = []
+let sequence = []
 let listening = false
 let selection
-let sequence = []
 
 // Let boxes listen, and make them "light gray"
 function enableReplayButton() {
@@ -40,6 +40,7 @@ function enableReplayButton() {
     })
 }
 
+// Make boxes "light gray" and listening
 const enableButtons = () => {
     listening = true
 
@@ -65,10 +66,10 @@ const reset = () => {
 // Computer's turn: the right panel resets, the left panel's lights increment, and the round sequence is shown
 const computerTurn = () => {
     
-        // Reset left lights to "gray"
-        leftLights.forEach(function(light) {
-            light.style.backgroundColor = `#696969`
-        })
+    // Reset left lights to "gray"
+    leftLights.forEach(function(light) {
+        light.style.backgroundColor = `#696969`
+    })
     
     // Compile left green lights and round sequence
     sequence = []
@@ -99,8 +100,6 @@ const computerTurn = () => {
             // Empty player array, and enable buttons for next round after a pause
             playerArr = []
             setTimeout( () => enableButtons(), 300)
-        }
-        else {
         }
     }, 500)
 }
